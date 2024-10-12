@@ -1,8 +1,16 @@
 spring:
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  config:
+    import: optional:file:.env[.properties]
   application:
     name: user-service
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST}:5432/${POSTGRES_DB}
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:liquibase/db.changelog.yml
+    enabled: true
 server:
   port: 0
 eureka:
