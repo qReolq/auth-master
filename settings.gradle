@@ -1,2 +1,4 @@
 rootProject.name = 'auth-master'
 includeBuild 'eureka-server'
+includeBuild 'user-service'
+includeBuild 'api-gateway'
