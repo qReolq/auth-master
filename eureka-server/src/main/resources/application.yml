@@ -1,15 +1,13 @@
 spring:
   config:
-    name: eureka-server
+    name: eurekaserver
 server:
   port: 8081
 eureka:
+  instance:
+    hostname: localhost
   client:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defaultZone:
-        http://localhost:8081/eureka
-logging:
-  pattern:
-    console: "%C{1.} [%-5level] %d{HH:mm:ss} - %msg%n"
+      defaultZone: http://localhost:8081/eureka
