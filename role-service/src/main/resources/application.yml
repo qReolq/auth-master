@@ -2,9 +2,9 @@ spring:
   config:
     import: optional:file:.env[.properties]
   application:
-    name: user-service
+    name: role-service
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_USER_PORT}/${POSTGRES_USER_DB}
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_ROLE_PORT}/${POSTGRES_ROLE_DB}
     username: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver

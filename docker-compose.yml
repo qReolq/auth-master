@@ -1,18 +1,30 @@
-version: '3'
-
-volumes:
-  db-data:
-    driver: local
+version: '3.8'
 
 services:
-  db:
-    image: postgres:15.1-alpine
-    container_name: postgres
+  userdb:
+    image: postgres:15
+    container_name: user_db
     environment:
-      - POSTGRES_USER=${POSTGRES_USERNAME}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
-    volumes:
-      - db-data:/var/lib/postgresql/data
+      POSTGRES_DB: ${POSTGRES_USER_DB}
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - '5432:5432'
+      - "${POSTGRES_USER_PORT}:5432"
+    volumes:
+      - postgres_data_user:/var/lib/postgresql/data
+
+  roledb:
+    image: postgres:15
+    container_name: role_db
+    environment:
+      POSTGRES_DB: ${POSTGRES_ROLE_DB}
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_ROLE_PORT}:5432"
+    volumes:
+      - postgres_data_role:/var/lib/postgresql/data
+
+volumes:
+  postgres_data_user:
+  postgres_data_role:
