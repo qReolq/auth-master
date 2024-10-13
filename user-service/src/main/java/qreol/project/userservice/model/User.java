@@ -34,7 +34,6 @@ public class User {
     private String email;
 
     @NotEmpty(message = "Password must be not empty", groups = {OnUpdate.class, OnCreate.class})
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Column(name = "create_at")
