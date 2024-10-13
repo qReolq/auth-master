@@ -1,4 +1,4 @@
-package qreol.project.userservice.web.controller;
+package qreol.project.roleservice.web.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -6,9 +6,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import qreol.project.userservice.model.exception.ResourceNotFoundException;
-import qreol.project.userservice.model.exception.ResourceNotValidException;
-import qreol.project.userservice.web.dto.exception.ExceptionBody;
+import qreol.project.roleservice.model.exception.ResourceNotFoundException;
+import qreol.project.roleservice.model.exception.ResourceNotValidException;
+import qreol.project.roleservice.web.dto.exception.ExceptionBody;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,4 +1,4 @@
-package qreol.project.userservice.web.exception;
+package qreol.project.roleservice.web.dto.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
