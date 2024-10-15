@@ -34,6 +34,9 @@ dependencies {
     implementation 'org.liquibase:liquibase-core'
     implementation 'net.lbruun.springboot:preliquibase-spring-boot-autoconfigure:1.5.1'
     implementation 'org.projectlombok:lombok:1.18.22'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+
     testImplementation 'com.h2database:h2'
 
 
