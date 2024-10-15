@@ -2,6 +2,7 @@ package qreol.project.roleservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import qreol.project.roleservice.model.Role;
 import qreol.project.roleservice.model.exception.ResourceNotFoundException;
 import qreol.project.roleservice.repository.RoleRepository;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
@@ -30,11 +32,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public Role create(Role role) {
         return roleRepository.save(role);
     }
 
     @Override
+    @Transactional
     public Role updateById(Role role, Long id) {
         Role toUpdate = getById(id);
 
@@ -50,6 +54,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         Role toDelete = getById(id);
 

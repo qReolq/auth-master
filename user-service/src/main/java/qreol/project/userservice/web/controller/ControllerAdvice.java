@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import qreol.project.userservice.model.exception.ResourceNotFoundException;
 import qreol.project.userservice.model.exception.ResourceNotValidException;
+import qreol.project.userservice.model.exception.RoleException;
 import qreol.project.userservice.web.dto.exception.ExceptionBody;
 
 import java.time.LocalDateTime;
@@ -39,6 +40,12 @@ public class ControllerAdvice {
 //        return new ExceptionBody("Internal error", LocalDateTime.now());
 //    }
 
+
+    @ExceptionHandler(RoleException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionBody handleRoleAlreadyAssigned(RoleException e) {
+        return new ExceptionBody(e.getMessage(), LocalDateTime.now());
+    }
 
     @ExceptionHandler(ResourceNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

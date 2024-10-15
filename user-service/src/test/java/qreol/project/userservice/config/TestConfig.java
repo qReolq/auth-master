@@ -8,7 +8,11 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import qreol.project.userservice.repository.UserRepository;
+import qreol.project.userservice.repository.UserRoleRepository;
+import qreol.project.userservice.service.RoleFeignClient;
+import qreol.project.userservice.service.UserRoleService;
 import qreol.project.userservice.service.UserService;
+import qreol.project.userservice.service.impl.UserRoleServiceImpl;
 import qreol.project.userservice.service.impl.UserServiceImpl;
 
 @TestConfiguration
@@ -20,12 +24,26 @@ public class TestConfig {
     private UserRepository userRepository;
 
     @Autowired
+    private UserRoleRepository userRoleRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RoleFeignClient roleFeignClient;
 
     @Bean
     @Primary
     public UserService userService() {
         return new UserServiceImpl(userRepository, passwordEncoder);
     }
+
+
+    @Bean
+    @Primary
+    public UserRoleService userRoleService() {
+        return new UserRoleServiceImpl(roleFeignClient, userService(), userRoleRepository);
+    }
+
 
 }
