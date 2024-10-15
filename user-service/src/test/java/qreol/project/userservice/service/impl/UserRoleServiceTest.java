@@ -41,7 +41,7 @@ public class UserRoleServiceTest {
     @Test
     void getRolesByUserIdWithRolesTest() {
         Long userId = 1L;
-        List<Long> roleIds = List.of(1L,2L);
+        List<Long> roleIds = List.of(1L, 2L);
 
         when(userService.getById(userId)).thenReturn(new User());
         when(userRoleRepository.findAllRolesIdsFromUserId(userId)).thenReturn(roleIds);
@@ -141,7 +141,7 @@ public class UserRoleServiceTest {
                 .thenReturn(Optional.empty());
 
         RoleException e = assertThrows(RoleException.class,
-                () ->  userRoleService.removeRoleFromUser(userId, roleId));
+                () -> userRoleService.removeRoleFromUser(userId, roleId));
 
         assertEquals(e.getMessage(), "User does not have this role");
 

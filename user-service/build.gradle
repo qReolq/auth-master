@@ -40,7 +40,6 @@ dependencies {
     testImplementation 'com.h2database:h2'
 
 
-
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
 

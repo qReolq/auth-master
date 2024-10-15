@@ -1,5 +1,6 @@
 package qreol.project.roleservice.web.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -15,30 +16,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestControllerAdvice
 public class ControllerAdvice {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ExceptionBody handleResourceNotFound(ResourceNotFoundException e) {
+        log.error("Resource not found: {}", e.getMessage());
         return new ExceptionBody(e.getMessage(), LocalDateTime.now());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionBody handleMethodArgumentNotValid(MethodArgumentNotValidException e) {
+        log.error("Validation failed: {}", e.getMessage());
         ExceptionBody exceptionBody = new ExceptionBody("Validation failed", LocalDateTime.now());
         exceptionBody.setErrors(mapListToMap(e.getBindingResult().getFieldErrors()));
 
         return exceptionBody;
     }
 
-//    @ExceptionHandler(Exception.class)
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    public ExceptionBody handleException(Exception e) {
-//        return new ExceptionBody("Internal error", LocalDateTime.now());
-//    }
-
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ExceptionBody handleException(Exception e) {
+        log.error("Role exception: {}", e.getMessage());
+        return new ExceptionBody("Internal error", LocalDateTime.now());
+    }
 
     @ExceptionHandler(ResourceNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

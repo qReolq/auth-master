@@ -49,7 +49,7 @@ public class RoleControllerIntegrationTest {
 
     @Test
     void getRoleByIdWithExistRoleTest() throws Exception {
-        Long searchId  = roleRepository.save(role).getId();
+        Long searchId = roleRepository.save(role).getId();
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/roles/" + searchId)
                         .contentType(MediaType.APPLICATION_JSON))
