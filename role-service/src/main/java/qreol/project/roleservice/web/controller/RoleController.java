@@ -1,6 +1,7 @@
 package qreol.project.roleservice.web.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -13,6 +14,7 @@ import qreol.project.roleservice.web.validation.validators.RoleValidator;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/roles")
@@ -23,12 +25,23 @@ public class RoleController {
 
     @GetMapping
     public ResponseEntity<List<Role>> getAllRoles() {
-        return ResponseEntity.ok(roleService.getAll());
+        log.info("Received request to get all roles");
+
+        List<Role> roles = roleService.getAll();
+
+        log.info("Returning {} roles", roles.size());
+
+        return ResponseEntity.ok(roles);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Role> getRoleById(@PathVariable Long id) {
-        return ResponseEntity.ok(roleService.getById(id));
+        log.info("Received request to get role by id: {}", id);
+
+        Role role = roleService.getById(id);
+
+        log.info("Returning role: {}", id);
+        return ResponseEntity.ok(role);
     }
 
     @PostMapping
@@ -36,6 +49,7 @@ public class RoleController {
             @RequestBody @Validated(OnCreate.class) Role role,
             BindingResult result
     ) {
+        log.info("Received request to create role: {}", role);
         roleValidator.validate(role, result);
 
         return ResponseEntity.ok(roleService.create(role));

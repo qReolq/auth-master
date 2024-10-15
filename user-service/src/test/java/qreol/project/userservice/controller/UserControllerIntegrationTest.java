@@ -54,7 +54,7 @@ public class UserControllerIntegrationTest {
 
     @Test
     void getUserByIdWithExistUserTest() throws Exception {
-        Long searchId  = userRepository.save(user).getId();
+        Long searchId = userRepository.save(user).getId();
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/users/" + searchId)
                         .contentType(MediaType.APPLICATION_JSON))
