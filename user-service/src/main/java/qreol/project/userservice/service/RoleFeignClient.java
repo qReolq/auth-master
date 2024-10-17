@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import qreol.project.userservice.web.dto.Role;
 
 @Component
-@FeignClient(name = "role-service", url = "http://localhost:8765/role-service/api/roles")
+@FeignClient(name = "role-service", url = "http://api-gateway:8765/role-service/api/roles")
 public interface RoleFeignClient {
 
     @GetMapping("/{id}")

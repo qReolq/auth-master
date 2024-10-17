@@ -1,6 +1,50 @@
 version: '3.8'
 
 services:
+  eureka-server:
+    build:
+      context: ./eureka-server/
+    ports:
+      - "${EUREKA_SERVER_PORT}:8761"
+    environment:
+      SERVER_PORT: 8761
+    networks:
+      - backend-network
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+    ports:
+      - "${API_GATEWAY_PORT}:8765"
+    environment:
+      SERVER_PORT: 8765
+    depends_on:
+      - eureka-server
+    networks:
+      - backend-network
+
+  user-service:
+    build:
+      context: ./user-service
+    env_file:
+      - .env
+    depends_on:
+      - api-gateway
+      - userdb
+    networks:
+      - backend-network
+
+  role-service:
+    build:
+      context: ./role-service
+    env_file:
+      - .env
+    depends_on:
+      - api-gateway
+      - roledb
+    networks:
+      - backend-network
+
   userdb:
     image: postgres:15
     container_name: user_db
@@ -8,10 +52,15 @@ services:
       POSTGRES_DB: ${POSTGRES_USER_DB}
       POSTGRES_USER: ${POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_POST: ${POSTGRES_ROLE_PORT}
+    env_file:
+      - .env
     ports:
       - "${POSTGRES_USER_PORT}:5432"
     volumes:
       - postgres_data_user:/var/lib/postgresql/data
+    networks:
+      - backend-network
 
   roledb:
     image: postgres:15
@@ -20,11 +69,21 @@ services:
       POSTGRES_DB: ${POSTGRES_ROLE_DB}
       POSTGRES_USER: ${POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_POST: ${POSTGRES_ROLE_PORT}
     ports:
-      - "${POSTGRES_ROLE_PORT}:5432"
+      - "${POSTGRES_ROLE_PORT}:5433"
     volumes:
       - postgres_data_role:/var/lib/postgresql/data
+    networks:
+      - backend-network
+    expose:
+      - "5433"
+    command: -p 5433
 
 volumes:
   postgres_data_user:
   postgres_data_role:
+
+networks:
+  backend-network:
+    driver: bridge
