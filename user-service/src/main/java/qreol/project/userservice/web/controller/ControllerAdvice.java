@@ -38,12 +38,12 @@ public class ControllerAdvice {
         return exceptionBody;
     }
 
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ExceptionBody handleException(Exception e) {
-        log.error("Role exception: {}", e.getMessage());
-        return new ExceptionBody("Internal error", LocalDateTime.now());
-    }
+//    @ExceptionHandler(Exception.class)
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    public ExceptionBody handleException(Exception e) {
+//        log.error("Role exception: {}", e.getMessage());
+//        return new ExceptionBody("Internal error", LocalDateTime.now());
+//    }
 
 
     @ExceptionHandler(RoleException.class)
