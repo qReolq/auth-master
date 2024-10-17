@@ -2,6 +2,10 @@
 
 The project is a distributed system based on microservice architecture designed to manage users and their roles.
 
+* [Endpoints](#endpoints)
+* [Quick start](#quick-start)
+* [Documentation](#documentation)
+
 ## Technologies
 Spring(Boot, JPA, Cloud), Swagger, Docker, PostgreSQL, Liquibase, JUnit, Mockito, JaCoCo, OpenFeign
 
@@ -24,8 +28,8 @@ Spring(Boot, JPA, Cloud), Swagger, Docker, PostgreSQL, Liquibase, JUnit, Mockito
     * The list of roles for a specific user can be fetched via GET `/api/users/{userId}/roles`.
 
 ## Endpoints
-  * User swagger docx: http://localhost:8765/user-service/swagger-ui/index.html
-  * Role swagger docx: http://localhost:8765/role-service/swagger-ui/index.html
+  * User swagger doc: http://localhost:8765/user-service/swagger-ui/index.html
+  * Role swagger doc: http://localhost:8765/role-service/swagger-ui/index.html
 
 ## Environments
 To run this application you need to create or fill `.env` file in root directory with next environments:
@@ -50,3 +54,6 @@ cd auth-master
 docker compose up
 ```
 3. Go to localhost:8761
+
+## Documentation
+Docs: https://docs.google.com/document/d/18mwqaaiF7_fEWt-_RUlwnMIZRd4y_GIBbnk5jdhz8lk/edit?usp=sharing
